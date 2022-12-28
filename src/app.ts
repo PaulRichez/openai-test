@@ -1,8 +1,7 @@
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const form = document.querySelector<HTMLFormElement>('form');
-const ageInput = document.querySelector<HTMLInputElement>('age');
-const OPENAI_API_KEYInput = document.querySelector<HTMLInputElement>('OPENAI_API_KEY');
-const themeInput = document.querySelector<HTMLInputElement>('theme');
+const OPENAI_API_KEYInput = document.getElementById('OPENAI_API_KEY') as HTMLInputElement;
+const ageInput = document.getElementById('age') as HTMLInputElement;
+const themeInput = document.getElementById('theme') as HTMLInputElement;
 const submitButton = document.querySelector<HTMLButtonElement>('button');
 const footer = document.querySelector<HTMLElement>('footer');
 
@@ -37,10 +36,10 @@ form?.addEventListener("submit", (event: SubmitEvent) => {
         method: 'POST',
         headers: {
             "content-Type": "application/json",
-            Authorization: `Bearer ${OPENAI_API_KEY || (OPENAI_API_KEYInput as HTMLInputElement).value}`
+            Authorization: `Bearer ${OPENAI_API_KEYInput.value}`
         },
         body: JSON.stringify({
-            prompt: generatePromptByAgeandTheme((ageInput?.valueAsNumber as number), themeInput?.value),
+            prompt: generatePromptByAgeandTheme(ageInput.valueAsNumber, themeInput?.value),
             max_tokens: 2000,
             model: 'text-davinci-003'
         })
@@ -55,6 +54,4 @@ form?.addEventListener("submit", (event: SubmitEvent) => {
 
 const translateTextToHtml = (text: string) => text.split('\n').map((str) => `<p>${str}</p>`).join('');
 
-
-export { }
 
