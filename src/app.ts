@@ -55,3 +55,4 @@ form?.addEventListener("submit", (event: SubmitEvent) => {
 const translateTextToHtml = (text: string) => text.split('\n').map((str) => `<p>${str}</p>`).join('');
 
 
+export { };
