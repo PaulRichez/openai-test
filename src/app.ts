@@ -1,6 +1,7 @@
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY || 'API Key'
+const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 const form = document.querySelector<HTMLFormElement>('form');
 const ageInput = document.querySelector<HTMLInputElement>('age');
+const OPENAI_API_KEYInput = document.querySelector<HTMLInputElement>('OPENAI_API_KEY');
 const themeInput = document.querySelector<HTMLInputElement>('theme');
 const submitButton = document.querySelector<HTMLButtonElement>('button');
 const footer = document.querySelector<HTMLElement>('footer');
@@ -36,7 +37,7 @@ form?.addEventListener("submit", (event: SubmitEvent) => {
         method: 'POST',
         headers: {
             "content-Type": "application/json",
-            Authorization: `Bearer ${OPENAI_API_KEY}`
+            Authorization: `Bearer ${OPENAI_API_KEY || (OPENAI_API_KEYInput as HTMLInputElement).value}`
         },
         body: JSON.stringify({
             prompt: generatePromptByAgeandTheme((ageInput?.valueAsNumber as number), themeInput?.value),
